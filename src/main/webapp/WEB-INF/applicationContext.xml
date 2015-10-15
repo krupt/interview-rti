@@ -32,13 +32,16 @@
 		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="/WEB-INF/jdbc.properties" />
+	</bean>
 	<bean id="dataSourceConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="poolName" value="DatabasePool" />
 		<property name="connectionTestQuery" value="SELECT 1 FROM DUAL" />
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:twcms" />
-		<property name="username" value="pay" />
-		<property name="password" value="pay" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 	</bean>
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<constructor-arg ref="dataSourceConfig" />
@@ -55,7 +58,7 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<!--<prop key="hibernate.default_schema">pay</prop>-->
+				<prop key="hibernate.default_schema">${jdbc.username}</prop>
 			</props>
 		</property>
 	</bean>
