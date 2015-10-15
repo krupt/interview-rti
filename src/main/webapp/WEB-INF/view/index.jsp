@@ -6,6 +6,7 @@
 <title>Добро пожаловать</title>
 </head>
 <body>
+<%@ include file="head.jsp" %>
 Welcome page
 <a href="user/service/list">Получить всех пользователей</a>
 </body>

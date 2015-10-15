@@ -25,8 +25,16 @@
 
 	<jpa:repositories base-package="ru.rti.repository" />
 
-	<sec:http auto-config="true" use-expressions="true">
-		
+	<sec:http auto-config="true">
+		<sec:intercept-url pattern="/login" access="permitAll" />
+		<sec:intercept-url pattern="/**" access="isAuthenticated()" />
+		<sec:form-login
+			login-page="/login"
+			default-target-url="/index"
+			authentication-failure-url="/login?error"
+			username-parameter="username"
+			password-parameter="password" />
+		<sec:logout logout-success-url="/login?logout" logout-url="/logout" />
 	</sec:http>
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
