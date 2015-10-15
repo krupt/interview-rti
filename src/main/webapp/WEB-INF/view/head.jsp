@@ -4,17 +4,17 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
 		<ul class="nav navbar-nav navbar-right">
-			<sec:authorize access="isAuthenticated()" var="isAuthenticated">
+			<sec:authorize access="isAuthenticated()" var="authenticated">
 				<li>
 					<a href=""><span class="glyphicon glyphicon-user"></span>&nbsp;<sec:authentication property="principal"/></a>
 				</li>
 			</sec:authorize>
-			<c:if test="${not isAuthenticated}">
+			<c:if test="${not authenticated}">
 				<li>
 					<a href="login" title="Вход"><span class="glyphicon glyphicon-log-in">&nbsp;</span>ВХОД</a>
 				</li>
 			</c:if>
-			<c:if test="${isAuthenticated}">
+			<c:if test="${authenticated}">
 				<li>
 					<a href="logout" title="Выход">ВЫХОД&nbsp;<span class="glyphicon glyphicon-log-out"></span></a>
 				</li>

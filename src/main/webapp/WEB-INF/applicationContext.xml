@@ -24,8 +24,9 @@
 	<jpa:repositories base-package="ru.rti.repository" />
 
 	<security:http>
-		<!--<security:intercept-url pattern="/login" access="permitAll" />-->
-		<security:intercept-url pattern="/**" access="hasRole('USER')" />
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/index" access="permitAll" />
+		<security:intercept-url pattern="/**" access="isAuthenticated()" />
 		<!--<security:form-login
 			login-page="/login"
 			default-target-url="/index"

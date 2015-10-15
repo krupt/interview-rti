@@ -5,12 +5,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/")
 public class ApplicationController {
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String getAppName() {
+	@RequestMapping(method = RequestMethod.GET, value = {"/", "/index"})
+	public String getIndexPage() {
 		return "index";
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/login")
+	public String getLoginPage() {
+		return "login";
 	}
 
 }
