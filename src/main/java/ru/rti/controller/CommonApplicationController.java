@@ -28,4 +28,9 @@ public class CommonApplicationController {
 		return modelView;
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/about")
+	public String getAboutInfo() {
+		return "about";
+	}
+
 }

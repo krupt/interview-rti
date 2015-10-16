@@ -1,19 +1,27 @@
 package ru.rti.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "UsersTable")
+@Table(name = "tUser")
+@NamedEntityGraph(name = "userRoles", includeAllAttributes = true)
 public class User {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@Column(unique = true, nullable = false, length = 50)
@@ -23,8 +31,14 @@ public class User {
 	private String descr;
 
 	@JsonIgnore
-	@Column(nullable = false)
+	@Column(nullable = false, length = 60)
 	private String password;
+
+	@Column
+	private boolean enabled;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<UserRole> roles = new HashSet<UserRole>(0);
 
 	public long getId() {
 		return id;
@@ -56,6 +70,22 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Set<UserRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<UserRole> roles) {
+		this.roles = roles;
 	}
 
 }

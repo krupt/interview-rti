@@ -37,10 +37,8 @@
 		<security:remember-me />
 	</security:http>
 	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="admin@admin.ru" password="1234" authorities="ROLE_USER, ROLE_ADMIN" />
-			</security:user-service>
+		<security:authentication-provider user-service-ref="userDetailsService">
+			<security:password-encoder hash="bcrypt" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 
@@ -62,19 +60,18 @@
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<constructor-arg ref="dataSourceConfig" />
 	</bean>
+	<bean id="vendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="generateDdl" value="true" />
+	</bean>
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" init-method="afterPropertiesSet">
 		<property name="packagesToScan" value="ru.rti.model" />
 		<property name="dataSource" ref="dataSource" />
-		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="generateDdl" value="true" />
-			</bean>
-		</property>
+		<property name="jpaVendorAdapter" ref="vendorAdapter" />
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
 	</bean>

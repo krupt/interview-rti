@@ -23,11 +23,10 @@
 		<li class="list-group-item">
 			<a href="about">О Компании</a>
 		</li>
-		<sec:authorize access="hasRole('admin')">
-			<li class="list-group-item">Список пользователей</li>
-		</sec:authorize>
 		<c:if test="${authenticated}">
-			<li class="list-group-item">Отправить письмо</li>
+			<li class="list-group-item">
+				<a href="send">Отправить письмо</a>
+			</li>
 		</c:if>
 	</ul>
 </div>
