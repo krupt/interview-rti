@@ -20,7 +20,9 @@
 		</div>
 	</c:if>
 	<ul class="list-group col-md-4">
-		<li class="list-group-item">О Компании</li>
+		<li class="list-group-item">
+			<a href="about">О Компании</a>
+		</li>
 		<sec:authorize access="hasRole('admin')">
 			<li class="list-group-item">Список пользователей</li>
 		</sec:authorize>
