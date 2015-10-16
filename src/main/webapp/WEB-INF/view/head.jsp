@@ -6,7 +6,7 @@
 		<ul class="nav navbar-nav navbar-right">
 			<sec:authorize access="isAuthenticated()" var="authenticated">
 				<li>
-					<a href=""><span class="glyphicon glyphicon-user"></span>&nbsp;<sec:authentication property="principal"/></a>
+					<a href=""><span class="glyphicon glyphicon-user"></span>&nbsp;<sec:authentication property="principal.username"/></a>
 				</li>
 			</sec:authorize>
 			<c:if test="${not authenticated}">
@@ -16,7 +16,10 @@
 			</c:if>
 			<c:if test="${authenticated}">
 				<li>
-					<a href="logout" title="Выход">ВЫХОД&nbsp;<span class="glyphicon glyphicon-log-out"></span></a>
+					<form action="logout" method="post">
+						<button type="submit" class="logout-btn text-danger">ВЫХОД&nbsp;<span class="glyphicon glyphicon-log-out"></span></button>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					</form>
 				</li>
 			</c:if>
 		</ul>

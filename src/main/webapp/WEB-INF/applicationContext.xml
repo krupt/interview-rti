@@ -23,25 +23,23 @@
 
 	<jpa:repositories base-package="ru.rti.repository" />
 
+	<security:http pattern="/resources/**" security="none" />
 	<security:http>
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/index" access="permitAll" />
+		<security:intercept-url pattern="/login" access="permitAll" />
 		<security:intercept-url pattern="/**" access="isAuthenticated()" />
-		<!--<security:form-login
-			login-page="/login"
-			default-target-url="/index"
-			login-processing-url="/j_spring_security_check"
-			authentication-failure-url="/login?error"
-			username-parameter="j_username"
-			password-parameter="j_password" />
-		<security:logout logout-success-url="/login?logout" logout-url="/j_spring_security_logout" />-->
-		<security:form-login />
-		<security:logout />
+		<security:form-login
+			login-page="/login" />
+		<security:logout
+			logout-url="/logout"
+			logout-success-url="/" />
+		<security:remember-me />
 	</security:http>
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:user-service>
-				<security:user name="admin" password="1234" authorities="ROLE_USER, ROLE_ADMIN" />
+				<security:user name="admin@admin.ru" password="1234" authorities="ROLE_USER, ROLE_ADMIN" />
 			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>
