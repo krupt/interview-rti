@@ -25,9 +25,14 @@
 		</li>
 		<c:if test="${authenticated}">
 			<li class="list-group-item">
-				<a href="send">Отправить письмо</a>
+				<a href="message/send">Отправить письмо</a>
 			</li>
 		</c:if>
+		<sec:authorize access="hasRole('ADMIN')">
+			<li class="list-group-item">
+				<a href="message/list">Список всех писем</a>
+			</li>
+		</sec:authorize>
 	</ul>
 </div>
 </body>

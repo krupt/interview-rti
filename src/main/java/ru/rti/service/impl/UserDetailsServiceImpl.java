@@ -20,15 +20,15 @@ import ru.rti.service.util.CurrentUser;
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	private final UserService service;
+	private final UserService userService;
 
 	@Autowired
 	public UserDetailsServiceImpl(UserService userService) {
-		service = userService;
+		this.userService = userService;
 	}
 
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = service.findByEmail(username);
+		User user = userService.findByEmail(username);
 		if (null == user)
 			throw new UsernameNotFoundException(username + " not found");
 		Set<GrantedAuthority> authorities = buildUserAuthority(user.getRoles());

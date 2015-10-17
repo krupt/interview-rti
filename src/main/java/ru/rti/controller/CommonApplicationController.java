@@ -2,7 +2,6 @@ package ru.rti.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
@@ -38,13 +37,6 @@ public class CommonApplicationController {
 	@RequestMapping(method = RequestMethod.GET, value = "/403")
 	public String getAccessDeniedPage() {
 		return "403";
-	}
-
-	@PreAuthorize("isAuthenticated()")
-	@RequestMapping(method = RequestMethod.GET, value = "/send")
-	public ModelAndView getSendPage() {
-		ModelAndView modelAndView = new ModelAndView("send");
-		return modelAndView;
 	}
 
 }

@@ -42,7 +42,7 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-lg btn-success">Войти</button>
+				<button class="btn btn-lg btn-success">Войти</button>
 			</div>
 		</div>
 	</form>

@@ -19,11 +19,11 @@ public class Message {
 	private long id;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn
+	@JoinColumn(name = "sender")
 	private User sender;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn
+	@JoinColumn(name = "recipient")
 	private User recipient;
 
 	@Column

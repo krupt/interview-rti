@@ -10,3 +10,6 @@ body {
 .logout-btn:hover {
 	opacity: 1;
 }
+.center {
+	text-align: center;
+}

@@ -12,59 +12,59 @@ import ru.rti.service.UserService;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-	private final UserRepository repository;
+	private final UserRepository userRepository;
 
 	@Autowired
 	public UserServiceImpl(UserRepository userRepository) {
-		repository = userRepository;
+		this.userRepository = userRepository;
 	}
 
 	public long count() {
-		return repository.count();
+		return userRepository.count();
 	}
 
 	public void delete(Long id) {
-		repository.delete(id);
+		userRepository.delete(id);
 	}
 
 	public void delete(User user) {
-		repository.delete(user);
+		userRepository.delete(user);
 	}
 
 	public void delete(Iterable<? extends User> users) {
-		repository.delete(users);
+		userRepository.delete(users);
 	}
 
 	public void deleteAll() {
-		repository.deleteAll();
+		userRepository.deleteAll();
 	}
 
 	public boolean exists(Long id) {
-		return repository.exists(id);
+		return userRepository.exists(id);
 	}
 
 	public Iterable<User> findAll() {
-		return repository.findAll();
+		return userRepository.findAll();
 	}
 
 	public Iterable<User> findAll(Iterable<Long> ids) {
-		return repository.findAll(ids);
+		return userRepository.findAll(ids);
 	}
 
 	public User findOne(Long id) {
-		return repository.findOne(id);
+		return userRepository.findOne(id);
 	}
 
 	public <S extends User> Iterable<S> save(Iterable<S> entities) {
-		return repository.save(entities);
+		return userRepository.save(entities);
 	}
 
 	public <S extends User> S save(S entity) {
-		return repository.save(entity);
+		return userRepository.save(entity);
 	}
 
 	public User findByEmail(String email) {
-		return repository.findByEmail(email);
+		return userRepository.findByEmail(email);
 	}
 
 }
