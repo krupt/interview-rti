@@ -23,6 +23,7 @@
 
 	<jpa:repositories base-package="ru.rti.repository" />
 
+	<security:global-method-security secured-annotations="enabled" />
 	<security:http pattern="/resources/**" security="none" />
 	<security:http>
 		<security:intercept-url pattern="/" access="permitAll" />
