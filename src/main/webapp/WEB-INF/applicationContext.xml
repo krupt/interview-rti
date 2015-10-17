@@ -23,13 +23,10 @@
 
 	<jpa:repositories base-package="ru.rti.repository" />
 
-	<security:global-method-security secured-annotations="enabled" />
+	<security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
 	<security:http pattern="/resources/**" security="none" />
 	<security:http>
-		<security:intercept-url pattern="/" access="permitAll" />
-		<security:intercept-url pattern="/index" access="permitAll" />
-		<security:intercept-url pattern="/login" access="permitAll" />
-		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+		<security:access-denied-handler error-page="/403" />
 		<security:form-login
 			login-page="/login" />
 		<security:logout

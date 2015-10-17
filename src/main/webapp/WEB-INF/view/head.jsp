@@ -6,7 +6,7 @@
 		<ul class="nav navbar-nav navbar-right">
 			<sec:authorize access="isAuthenticated()" var="authenticated">
 				<li>
-					<a href=""><span class="glyphicon glyphicon-user"></span>&nbsp;<sec:authentication property="principal.username"/></a>
+					<a href=""><span class="glyphicon glyphicon-user"></span>&nbsp;<sec:authentication property="principal.description"/></a>
 				</li>
 			</sec:authorize>
 			<c:if test="${not authenticated}">

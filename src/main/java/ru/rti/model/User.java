@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tUser")
-@NamedEntityGraph(name = "userRoles", includeAllAttributes = true)
+@NamedEntityGraph(name = "userRoles", attributeNodes = @NamedAttributeNode("roles"))
 public class User {
 
 	@Id
