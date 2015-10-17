@@ -12,12 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class CommonApplicationController {
 
-	@RequestMapping(method = RequestMethod.GET, value = {"/", "/index"})
+	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String getIndexPage() {
 		return "index";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/login")
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView getLoginPage(HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView("login");
 		Object securityException = session.getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
@@ -29,12 +29,12 @@ public class CommonApplicationController {
 		return modelAndView;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/about")
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
 	public String getAboutInfo() {
 		return "about";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/403")
+	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public String getAccessDeniedPage() {
 		return "403";
 	}

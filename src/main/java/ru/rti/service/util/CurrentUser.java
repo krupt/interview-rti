@@ -43,4 +43,12 @@ public class CurrentUser extends User {
 		this.description = description;
 	}
 
+	@Override
+	public String toString() {
+		return new StringBuilder(super.toString()).append("; ")
+				.append("Id: ").append(id).append("; ")
+				.append("Description: ").append(description)
+			.toString();
+	}
+
 }

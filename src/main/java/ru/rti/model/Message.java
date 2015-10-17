@@ -1,6 +1,7 @@
 package ru.rti.model;
 
 import javax.persistence.Table;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name = "tMessage")
@@ -18,12 +19,12 @@ public class Message {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "sender")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "sender", nullable = false)
 	private User sender;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "recipient")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "recipient", nullable = false)
 	private User recipient;
 
 	@Column
@@ -70,6 +71,31 @@ public class Message {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	@Override
+	public int hashCode() {
+		return (int) id;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj instanceof Message)
+			return this.id == ((Message) obj).id;
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return new StringBuilder("Message[")
+				.append(id).append(", ")
+				.append(sender).append(", ")
+				.append(recipient).append(", ")
+				.append(topic).append(", ")
+				.append(message).append("]")
+			.toString();
 	}
 
 }

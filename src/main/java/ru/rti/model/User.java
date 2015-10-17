@@ -35,11 +35,21 @@ public class User {
 	@Column(nullable = false, length = 60)
 	private String password;
 
+	@JsonIgnore
 	@Column
 	private boolean enabled;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<UserRole> roles = new HashSet<UserRole>(0);
+
+	public User() {
+		
+	}
+
+	public User(long id) {
+		setId(id);
+	}
 
 	public long getId() {
 		return id;
@@ -87,6 +97,28 @@ public class User {
 
 	public void setRoles(Set<UserRole> roles) {
 		this.roles = roles;
+	}
+
+	@Override
+	public int hashCode() {
+		return (int) id;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj instanceof User)
+			return this.id == ((User) obj).id;
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return new StringBuilder("User[").append(id).append(", ")
+				.append(email).append(", ")
+				.append(descr).append("]")
+			.toString();
 	}
 
 }

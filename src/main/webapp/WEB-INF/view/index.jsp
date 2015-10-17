@@ -25,12 +25,12 @@
 		</li>
 		<c:if test="${authenticated}">
 			<li class="list-group-item">
-				<a href="message/send">Отправить письмо</a>
+				<a href="message/send">Отправить сообщение</a>
 			</li>
 		</c:if>
 		<sec:authorize access="hasRole('ADMIN')">
 			<li class="list-group-item">
-				<a href="message/list">Список всех писем</a>
+				<a href="message/list">Список всех сообщений</a>
 			</li>
 		</sec:authorize>
 	</ul>

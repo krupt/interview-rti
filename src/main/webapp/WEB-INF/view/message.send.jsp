@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Отправить письмо</title>
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
+<title>Отправить сообщение</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />" />
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />" />
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.min.js" />"></script>
@@ -41,7 +43,6 @@
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<button class="btn btn-lg btn-success">Отправить</button>
-				<button type="button" id="form_open" class="btn btn-lg btn-primary">Открыть форму</button>
 			</div>
 		</div>
 	</form>
@@ -50,9 +51,11 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-body center">
-				<div id="waiting_body center">
+				<div id="waiting_body">
 					<img src="<c:url value="/resources/img/process.gif" />" align="middle">
 					<span style="margin-left: 10px;">Подождите...</span><br><br>
+				</div>
+				<div id="results_body" class="center">
 				</div>
 			</div>
 			<div class="modal-footer">

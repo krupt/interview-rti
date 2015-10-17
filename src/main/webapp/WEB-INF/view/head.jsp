@@ -4,10 +4,17 @@
 <sec:authentication property="principal.id" var="currentUserId" />
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
+		<ul class="nav navbar-nav navbar-left">
+			<li>
+				<a class="navbar-brand" href="<c:url value="/" />">
+					<span class="glyphicon glyphicon-home"></span>&nbsp;RTI-Project
+				</a>
+			</li>
+		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<sec:authorize access="isAuthenticated()" var="authenticated">
 				<li>
-					<a href=""><span class="glyphicon glyphicon-user"></span>&nbsp;<sec:authentication property="principal.description" /></a>
+					<a href="<c:url value="/user/info" />"><span class="glyphicon glyphicon-user"></span>&nbsp;<sec:authentication property="principal.description" /></a>
 				</li>
 			</sec:authorize>
 			<c:if test="${not authenticated}">
