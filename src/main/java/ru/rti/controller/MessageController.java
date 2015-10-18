@@ -39,16 +39,22 @@ public class MessageController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView getListPage() {
+		log.debug("Подготовка данных для просмотра всех сообщений");
 		ModelAndView modelAndView = new ModelAndView(PATH + ".list");
+		log.debug("Получение всех сообщений системы");
 		modelAndView.addObject("messages", messageService.findAll());
+		log.debug("Подготовка данных для страницы завершена");
 		return modelAndView;
 	}
 
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/send", method = RequestMethod.GET)
 	public ModelAndView getSendPage() {
+		log.debug("Подготовка данных для страницы отправки сообщений");
 		ModelAndView modelAndView = new ModelAndView(PATH + ".send");
+		log.debug("Получение всех пользователей для составления списка получателей");
 		modelAndView.addObject("recipients", userService.findAll());
+		log.debug("Подготовка данных для страницы завершена");
 		return modelAndView;
 	}
 
@@ -72,7 +78,7 @@ public class MessageController {
 		newMessage.setTopic(topic);
 		newMessage.setMessage(message);
 		newMessage = messageService.save(newMessage);
-		log.debug("Сообщение успешно создано. Детальная информация: " + newMessage);
+		log.debug("Сообщение успешно создано с № " + newMessage.getId());
 		return newMessage;
 	}
 
