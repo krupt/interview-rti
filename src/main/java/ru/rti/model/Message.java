@@ -10,9 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 
 @Entity
 @Table(name = "tMessage")
+@NamedEntityGraph(name = "users", attributeNodes = {@NamedAttributeNode("sender"), @NamedAttributeNode("recipient")})
 public class Message {
 
 	@Id

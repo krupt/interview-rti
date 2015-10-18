@@ -78,7 +78,7 @@ public class MessageController {
 		newMessage.setTopic(topic);
 		newMessage.setMessage(message);
 		newMessage = messageService.save(newMessage);
-		log.debug("Сообщение успешно создано с № " + newMessage.getId());
+		log.debug("Сообщение успешно создано (Id: " + newMessage.getId() + ")");
 		return newMessage;
 	}
 
