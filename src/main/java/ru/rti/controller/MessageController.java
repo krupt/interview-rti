@@ -1,5 +1,7 @@
 package ru.rti.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +25,8 @@ public class MessageController {
 
 	public static final String PATH = "message";
 	public static final String URL = "/" + PATH;
+
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	private final UserService userService;
 	private final MessageService messageService;
 
@@ -47,7 +51,7 @@ public class MessageController {
 		modelAndView.addObject("recipients", userService.findAll());
 		return modelAndView;
 	}
-	
+
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -59,6 +63,7 @@ public class MessageController {
 		try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {
+			log.error("", e);
 		}
 		Message newMessage = new Message();
 		newMessage.setSender(new User(((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
