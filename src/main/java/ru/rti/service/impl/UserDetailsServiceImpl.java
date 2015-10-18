@@ -3,6 +3,8 @@ package ru.rti.service.impl;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,6 +23,7 @@ import ru.rti.service.util.CurrentUser;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	private final UserService userService;
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	public UserDetailsServiceImpl(UserService userService) {
@@ -28,11 +31,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	}
 
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		log.debug("Авторизация пользователя с именем: " + username);
 		User user = userService.findByEmail(username);
-		if (null == user)
+		if (null == user) {
+			log.warn("Пользователь \"" + username + "\" не найден в БД");
 			throw new UsernameNotFoundException(username + " not found");
+		}
 		Set<GrantedAuthority> authorities = buildUserAuthority(user.getRoles());
-		return new CurrentUser(user.getId(), user.getEmail(), user.getPassword(), user.getDescr(), user.isEnabled(), true, true, true, authorities);
+		CurrentUser currentUser = new CurrentUser(user.getId(), user.getEmail(), user.getPassword(), user.getDescr(), user.isEnabled(), true, true, true, authorities);
+		log.debug("Успешная авторизация. Детальная информация: \n");
+		return currentUser;
 	}
 
 	private Set<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
@@ -42,6 +50,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		return auths;
 	}
 
+	/*
+	 * Используется для генерации значений паролей
+	 */
 	public static void main(String[] args) {
 		System.out.println(new BCryptPasswordEncoder().encode("12345"));
 	}

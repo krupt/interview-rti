@@ -56,6 +56,7 @@ public class MessageController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Message createMessage(@RequestParam(required = true) long recipient, @RequestParam(required = true) String topic, @RequestParam(required = true) String message) {
+		log.debug("Регистрация нового сообщения в БД");
 		/* 
 		 * Сделано для того, чтобы было видно картинку загрузки и надпись "Подождите..."
 		 * В реальном проекте - убираем :)
@@ -70,7 +71,9 @@ public class MessageController {
 		newMessage.setRecipient(new User(recipient));
 		newMessage.setTopic(topic);
 		newMessage.setMessage(message);
-		return messageService.save(newMessage);
+		newMessage = messageService.save(newMessage);
+		log.debug("Сообщение успешно создано. Детальная информация: " + newMessage);
+		return newMessage;
 	}
 
 }

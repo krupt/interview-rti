@@ -3,6 +3,8 @@ package ru.rti.controller;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,8 +21,11 @@ import ru.rti.service.util.CurrentUser;
 @RequestMapping("/user")
 public class UserController {
 
+	private final Logger log = LoggerFactory.getLogger(getClass());
+
 	@RequestMapping(value = "/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public void getCurrentUserInfo(HttpServletResponse response) {
+		log.debug("Получение информации о текущем пользователе");
 		try (JsonGenerator generator = new JsonFactory().createGenerator(response.getOutputStream())) {
 			CurrentUser user = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			generator.writeStartObject();
@@ -34,8 +39,10 @@ public class UserController {
 			generator.writeEndArray();
 			generator.writeEndObject();
 		} catch (IOException e) {
+			log.error("Ошибка", e);
 			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		}
+		log.debug("Информация отправлена");
 	}
 
 }
