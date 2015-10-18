@@ -21,7 +21,7 @@
 		<div class="form-group">
 			<label for="username" class="col-sm-2 control-label">E-mail</label>
 			<div class="col-sm-6">
-				<input type="email" class="form-control" id="username" name="username" required>
+				<input type="email" class="form-control" id="username" name="username" required autofocus>
 			</div>
 		</div>
 		<div class="form-group">
