@@ -39,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		}
 		Set<GrantedAuthority> authorities = buildUserAuthority(user.getRoles());
 		CurrentUser currentUser = new CurrentUser(user.getId(), user.getEmail(), user.getPassword(), user.getDescr(), user.isEnabled(), true, true, true, authorities);
-		log.debug("Успешная авторизация. Детальная информация: \n");
+		log.debug("Пользователь найден: \n" + currentUser);
 		return currentUser;
 	}
 

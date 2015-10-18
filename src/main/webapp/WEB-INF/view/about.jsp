@@ -13,7 +13,9 @@
 <%@ include file="head.jsp" %>
 <div class="container">
 	<div class="well">
-		Информация
+		<h1>Информация о компании<br></h1>
+		Некоторая информация о компании<br>
+		...
 	</div>
 </div>
 </body>

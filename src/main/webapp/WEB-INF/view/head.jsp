@@ -19,12 +19,12 @@
 			</sec:authorize>
 			<c:if test="${not authenticated}">
 				<li>
-					<a href="login" title="Вход"><span class="glyphicon glyphicon-log-in">&nbsp;</span>ВХОД</a>
+					<a href="<c:url value="/login" />" title="Вход"><span class="glyphicon glyphicon-log-in">&nbsp;</span>ВХОД</a>
 				</li>
 			</c:if>
 			<c:if test="${authenticated}">
 				<li>
-					<form action="logout" method="post">
+					<form action="<c:url value="/logout" />" method="post">
 						<button type="submit" class="logout-btn text-danger">ВЫХОД&nbsp;<span class="glyphicon glyphicon-log-out"></span></button>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					</form>
