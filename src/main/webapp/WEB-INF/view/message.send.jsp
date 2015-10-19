@@ -15,7 +15,7 @@
 		<div class="form-group">
 			<label for="recipient" class="col-sm-2 control-label">Получатель</label>
 			<div class="col-sm-10">
-				<select id="recipient" name="recipient" class="form-control">
+				<select id="recipient" name="recipient" class="form-control" required>
 					<c:forEach items="${recipients}" var="recipient">
 						<option value="${recipient.id}">${recipient.descr}&nbsp;&lt;${recipient.email}&gt;</option>
 					</c:forEach>
