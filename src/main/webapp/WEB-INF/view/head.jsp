@@ -12,7 +12,6 @@
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<sec:authorize access="isAuthenticated()" var="authenticated">
-				<sec:authentication property="principal.id" var="currentUserId" />
 				<li>
 					<a href="<c:url value="/user/info" />"><span class="glyphicon glyphicon-user"></span>&nbsp;<sec:authentication property="principal.description" /></a>
 				</li>

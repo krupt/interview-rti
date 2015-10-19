@@ -63,8 +63,13 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(entity);
 	}
 
-	public User findByEmail(String email) {
-		return userRepository.findByEmail(email);
+	public User findByEmailIgnoreCase(String email) {
+		return userRepository.findByEmailIgnoreCase(email);
+	}
+
+	@Override
+	public Iterable<User> findByIdNot(Long id) {
+		return userRepository.findByIdNot(id);
 	}
 
 }

@@ -54,7 +54,7 @@ public class MessageController {
 		log.debug("Подготовка данных для страницы отправки сообщений");
 		ModelAndView modelAndView = new ModelAndView(PATH + ".send");
 		log.debug("Получение всех пользователей для составления списка получателей");
-		modelAndView.addObject("recipients", userService.findAll());
+		modelAndView.addObject("recipients", userService.findByIdNot(((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
 		log.debug("Подготовка данных для страницы завершена");
 		return modelAndView;
 	}

@@ -21,9 +21,7 @@
 			<div class="col-sm-10">
 				<select id="recipient" name="recipient" class="form-control">
 					<c:forEach items="${recipients}" var="recipient">
-						<c:if test="${not recipient.id.equals(currentUserId)}">
-							<option value="${recipient.id}">${recipient.descr}&nbsp;&lt;${recipient.email}&gt;</option>
-						</c:if>
+						<option value="${recipient.id}">${recipient.descr}&nbsp;&lt;${recipient.email}&gt;</option>
 					</c:forEach>
 				</select>
 			</div>

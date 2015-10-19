@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		log.debug("Авторизация пользователя с именем: " + username);
-		User user = userService.findByEmail(username);
+		User user = userService.findByEmailIgnoreCase(username);
 		if (null == user) {
 			log.warn("Пользователь \"" + username + "\" не найден в БД");
 			throw new UsernameNotFoundException(username + " not found");

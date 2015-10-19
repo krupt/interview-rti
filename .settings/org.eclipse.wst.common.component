@@ -7,5 +7,6 @@
         <wb-resource deploy-path="/" source-path="/webapp"/>
         <property name="context-root" value="rti"/>
         <property name="java-output-path" value="/rti/target/classes"/>
+        <property name="component.exclusion.patterns" value="WEB-INF/classes/"/>
     </wb-module>
 </project-modules>

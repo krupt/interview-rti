@@ -9,6 +9,8 @@ import ru.rti.model.User;
 public interface UserRepository extends CrudRepository<User, Long> {
 
 	@EntityGraph(value = "userRoles", type = EntityGraphType.FETCH)
-	User findByEmail(String email);
+	User findByEmailIgnoreCase(String email);
+
+	Iterable<User> findByIdNot(Long id);
 
 }
