@@ -22,10 +22,11 @@ public class UserController {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@RequestMapping(value = "/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public void getCurrentUserInfo(HttpServletResponse response) {
 		log.debug("Получение информации о текущем пользователе");
 		try (JsonGenerator generator = new JsonFactory().createGenerator(response.getOutputStream())) {
+			response.setContentType(MediaType.APPLICATION_JSON_VALUE + "; charset=UTF-8");
 			CurrentUser user = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			generator.writeStartObject();
 			generator.writeNumberField("id", user.getId());
