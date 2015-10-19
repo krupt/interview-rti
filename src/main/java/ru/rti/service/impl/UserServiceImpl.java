@@ -67,7 +67,6 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByEmailIgnoreCase(email);
 	}
 
-	@Override
 	public Iterable<User> findByIdNot(Long id) {
 		return userRepository.findByIdNot(id);
 	}
