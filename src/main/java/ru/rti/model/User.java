@@ -31,7 +31,7 @@ public class User {
 	private String email;
 
 	@Column(nullable = false)
-	private String descr;
+	private String description;
 
 	@JsonIgnore
 	@Column(nullable = false, length = 60)
@@ -69,12 +69,12 @@ public class User {
 		this.email = email;
 	}
 
-	public String getDescr() {
-		return descr;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescr(String descr) {
-		this.descr = descr;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getPassword() {
@@ -119,7 +119,7 @@ public class User {
 	public String toString() {
 		return new StringBuilder("User[").append(id).append(", ")
 				.append(email).append(", ")
-				.append(descr).append("]")
+				.append(description).append("]")
 			.toString();
 	}
 

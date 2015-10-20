@@ -17,7 +17,7 @@
 			<div class="col-sm-10">
 				<select id="recipient" name="recipient" class="form-control" required>
 					<c:forEach items="${recipients}" var="recipient">
-						<option value="${recipient.id}">${recipient.descr}&nbsp;&lt;${recipient.email}&gt;</option>
+						<option value="${recipient.id}">${recipient.description}&nbsp;&lt;${recipient.email}&gt;</option>
 					</c:forEach>
 				</select>
 			</div>

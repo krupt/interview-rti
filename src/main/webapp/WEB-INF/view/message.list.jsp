@@ -17,16 +17,20 @@
 				<th>Получатель</th>
 				<th>Тема</th>
 				<th>Сообщение</th>
+				<th>Дата создания</th>
+				<th>Статус</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${messages}" var="message">
 				<tr>
 					<td>${message.id}</td>
-					<td>${message.sender.descr}&nbsp;&lt;${message.sender.email}&gt;</td>
-					<td>${message.recipient.descr}&nbsp;&lt;${message.recipient.email}&gt;</td>
+					<td>${message.sender.description}&nbsp;&lt;${message.sender.email}&gt;</td>
+					<td>${message.recipient.description}&nbsp;&lt;${message.recipient.email}&gt;</td>
 					<td>${message.topic}</td>
 					<td>${message.message}</td>
+					<td>${message.created}</td>
+					<td>${message.status}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

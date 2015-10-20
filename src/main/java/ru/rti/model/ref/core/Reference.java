@@ -3,7 +3,7 @@ package ru.rti.model.ref.core;
 import javax.persistence.*;
 
 @MappedSuperclass
-public class Reference {
+public class Reference implements Description {
 
 	public static final String PREFIX = "tReference";
 
@@ -12,7 +12,7 @@ public class Reference {
 	private int id;
 
 	@Column(unique = true, nullable = false, length = 32)
-	private String code;
+	private String javaCode;
 
 	@Column
 	private String description;
@@ -25,12 +25,12 @@ public class Reference {
 		this.id = id;
 	}
 
-	public String getCode() {
-		return code;
+	public String getJavaCode() {
+		return javaCode;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setJavaCode(String javaCode) {
+		this.javaCode = javaCode;
 	}
 
 	public String getDescription() {
