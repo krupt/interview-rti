@@ -32,7 +32,7 @@
 		<security:logout
 			logout-url="/logout"
 			logout-success-url="/" />
-		<security:remember-me />
+		<security:remember-me user-service-ref="userDetailsService" key="krupt-rti-app" />
 	</security:http>
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="userDetailsService">
