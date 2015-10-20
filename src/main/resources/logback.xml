@@ -21,14 +21,22 @@
 	</appender>
 	<logger name="ru.rti" level="DEBUG" additivity="false">
 		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
 	</logger>
 	<logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
 		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
 	</logger>
-	<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" additivity="false">
+	<logger name="org.hibernate.type" level="TRACE" additivity="false">
 		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="INFO" additivity="false">
+		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
 	</logger>
 	<root level="INFO">
 		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
 	</root>
 </configuration>

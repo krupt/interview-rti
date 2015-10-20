@@ -26,7 +26,7 @@ public class UserRole {
 	@JoinColumn(name = "userId")
 	private User user;
 
-	@Column(length = 30, nullable = false)
+	@Column(nullable = false, length = 30)
 	private String role;
 
 	public long getId() {

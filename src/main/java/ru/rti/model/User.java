@@ -18,7 +18,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tUser")
-@NamedEntityGraph(name = "userRoles", attributeNodes = @NamedAttributeNode("roles"))
+@NamedEntityGraph(name = "userRoles",
+	attributeNodes = @NamedAttributeNode("roles")
+)
 public class User {
 
 	@Id

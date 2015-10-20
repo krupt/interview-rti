@@ -1,22 +1,25 @@
 package ru.rti.model;
 
-import javax.persistence.Table;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
+import java.util.Date;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "tMessage")
-@NamedEntityGraph(name = "users", attributeNodes = {@NamedAttributeNode("sender"), @NamedAttributeNode("recipient")})
+@Table(name = "tMessage",
+	indexes = {@Index(columnList = "recipient"),
+		@Index(columnList = "sender")
+	}
+)
+@NamedEntityGraph(name = "users",
+	attributeNodes = {@NamedAttributeNode("sender"),
+		@NamedAttributeNode("recipient")
+	}
+)
 public class Message {
+
+	public enum Status {
+		NEW,
+		READED;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +38,19 @@ public class Message {
 
 	@Column(length = 4000, nullable = false)
 	private String message;
+
+	@Column(nullable = false, updatable = false)
+	private Date created;
+
+	@Enumerated(EnumType.ORDINAL)
+	@Column(nullable = false)
+	private Status status;
+
+	@PrePersist
+	public void onCreate() {
+		setCreated(new Date());
+		setStatus(Status.NEW);
+	}
 
 	public long getId() {
 		return id;
@@ -76,6 +92,22 @@ public class Message {
 		this.message = message;
 	}
 
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int) id;
@@ -97,8 +129,10 @@ public class Message {
 				.append(sender).append(", ")
 				.append(recipient).append(", ")
 				.append(topic).append(", ")
-				.append(message).append("]")
-			.toString();
+				.append(message).append(", ")
+				.append(created).append(", ")
+				.append(status)
+			.append("]").toString();
 	}
 
 }
