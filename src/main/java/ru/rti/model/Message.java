@@ -3,8 +3,6 @@ package ru.rti.model;
 import java.util.Date;
 import javax.persistence.*;
 
-import ru.rti.model.ref.core.Description;
-
 @Entity
 @Table(name = "tMessage",
 	indexes = {@Index(columnList = "recipient"),
@@ -18,23 +16,9 @@ import ru.rti.model.ref.core.Description;
 )
 public class Message {
 
-	public enum Status implements Description {
-		NEW("Новое сообщение"),
-		READED("Прочитано");
-
-		private String description;
-	
-		private Status(String description) {
-			setDescription(description);
-		}
-	
-		public String getDescription() {
-			return description;
-		}
-
-		public void setDescription(String description) {
-			this.description = description;
-		}
+	public enum Status {
+		NEW,
+		READED;
 	}
 
 	@Id

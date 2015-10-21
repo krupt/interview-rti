@@ -3,7 +3,7 @@ package ru.rti.model.ref.core;
 import javax.persistence.*;
 
 @MappedSuperclass
-public class Reference implements Description {
+public class Reference {
 
 	public static final String PREFIX = "tReference";
 

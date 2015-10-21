@@ -13,15 +13,10 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<context:annotation-config />
-	<context:component-scan base-package="ru.rti.model" />
+	<context:component-scan base-package="ru.rti" />
 
 	<!--<mvc:annotation-driven />
 	<mvc:resources location="/resources/" mapping="/resources/**" />-->
-
-	<tx:annotation-driven transaction-manager="transactionManager" />
-
-	<jpa:repositories base-package="ru.rti.repository" />
 
 	<!--<security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
 	<security:http pattern="/resources/**" security="none" />
@@ -44,9 +39,6 @@
 		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>-->
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:application.properties" />
-	</bean>
 	<bean id="dataSourceConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="poolName" value="DatabasePool" />
 		<property name="connectionTestQuery" value="SELECT 1" />
@@ -72,8 +64,5 @@
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
-	</bean>
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<constructor-arg ref="entityManagerFactory" />
 	</bean>
 </beans>
