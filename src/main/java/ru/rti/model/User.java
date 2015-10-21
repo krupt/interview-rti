@@ -38,7 +38,6 @@ public class User {
 	private String password;
 
 	@JsonIgnore
-	@Column
 	private boolean enabled;
 
 	@JsonIgnore

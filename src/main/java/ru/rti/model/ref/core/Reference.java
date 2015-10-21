@@ -14,7 +14,6 @@ public class Reference implements Description {
 	@Column(unique = true, nullable = false, length = 32)
 	private String javaCode;
 
-	@Column
 	private String description;
 
 	public int getId() {

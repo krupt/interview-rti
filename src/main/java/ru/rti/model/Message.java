@@ -49,7 +49,6 @@ public class Message {
 	@JoinColumn(name = "recipient", nullable = false)
 	private User recipient;
 
-	@Column
 	private String topic;
 
 	@Column(length = 4000, nullable = false)
