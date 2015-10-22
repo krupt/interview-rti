@@ -51,7 +51,7 @@
 		<constructor-arg ref="dataSourceConfig" />
 	</bean>
 	<bean id="vendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-		<property name="generateDdl" value="true" />
+		
 	</bean>
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" init-method="afterPropertiesSet">
 		<property name="packagesToScan" value="ru.rti.model" />
@@ -61,6 +61,7 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>
 				<prop key="hibernate.format_sql">true</prop>
+				
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>

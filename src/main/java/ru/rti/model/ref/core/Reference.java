@@ -40,4 +40,26 @@ public class Reference {
 		this.description = description;
 	}
 
+	@Override
+	public int hashCode() {
+		return id;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Reference)
+			return id == ((Reference) obj).id;
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return new StringBuilder("Reference(")
+				.append(getClass().getSimpleName()).append(")[")
+				.append(id).append(", ")
+				.append(javaCode).append(", ")
+				.append(description).append("]")
+			.toString();
+	}
+
 }

@@ -1,12 +1,14 @@
 package ru.rti.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.rti.model.User;
 import ru.rti.repository.UserRepository;
 import ru.rti.service.UserService;
+import ru.rti.service.util.CurrentUser;
 
 @Service
 @Transactional
@@ -69,6 +71,10 @@ public class UserServiceImpl implements UserService {
 
 	public Iterable<User> findByIdNot(Long id) {
 		return userRepository.findByIdNot(id);
+	}
+
+	public CurrentUser getCurrentUser() {
+		return (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 
 }

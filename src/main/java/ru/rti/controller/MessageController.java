@@ -74,7 +74,7 @@ public class MessageController {
 			log.error("", e);
 		}
 		Message newMessage = new Message();
-		newMessage.setSender(new User(((CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()));
+		newMessage.setSender(new User(userService.getCurrentUser().getId()));
 		newMessage.setRecipient(new User(recipient));
 		newMessage.setTopic(topic);
 		newMessage.setMessage(message);

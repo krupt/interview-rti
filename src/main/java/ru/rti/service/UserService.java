@@ -1,9 +1,13 @@
 package ru.rti.service;
 
-import ru.rti.repository.UserRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 
+import ru.rti.repository.UserRepository;
+import ru.rti.service.util.CurrentUser;
+
+@NoRepositoryBean
 public interface UserService extends UserRepository {
-	/*
-	 * Чтобы не описывать множество методов, просто берем все методы из репозитория
-	 */
+
+	CurrentUser getCurrentUser();
+
 }

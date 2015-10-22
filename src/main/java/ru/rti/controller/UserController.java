@@ -5,15 +5,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
+import ru.rti.service.UserService;
 import ru.rti.service.util.CurrentUser;
 
 @Controller
@@ -21,13 +22,19 @@ import ru.rti.service.util.CurrentUser;
 public class UserController {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
+	private final UserService userService;
+
+	@Autowired
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
 
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public void getCurrentUserInfo(HttpServletResponse response) {
 		log.debug("Получение информации о текущем пользователе");
 		try (JsonGenerator generator = new JsonFactory().createGenerator(response.getOutputStream())) {
 			response.setContentType(MediaType.APPLICATION_JSON_VALUE + "; charset=UTF-8");
-			CurrentUser user = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			CurrentUser user = userService.getCurrentUser();
 			generator.writeStartObject();
 			generator.writeNumberField("id", user.getId());
 			generator.writeStringField("name", user.getUsername());
