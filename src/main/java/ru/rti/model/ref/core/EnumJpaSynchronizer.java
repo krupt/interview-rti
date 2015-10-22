@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.persistence.Column;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Table;
 import javax.persistence.TypedQuery;
 import javax.sql.DataSource;
@@ -90,8 +91,14 @@ public class EnumJpaSynchronizer {
 			try {
 				TypedQuery<? extends Reference> selectQuery = entityManager.createQuery("SELECT e FROM " + mappedClass.getSimpleName() + " e WHERE javaCode = ?1", mappedClass);
 				selectQuery.setParameter(1, constant.toString());
-				if (selectQuery.getSingleResult() != null)
+				try {
+					selectQuery.getSingleResult();
 					continue;
+				} catch (NoResultException e) {
+					/*
+					 * Нужно добавить значение
+					 */
+				}
 				Reference newInstance = mappedClass.newInstance();
 				newInstance.setJavaCode(constant.toString());
 				TransactionTemplate template = new TransactionTemplate(transactionManager);
@@ -101,9 +108,7 @@ public class EnumJpaSynchronizer {
 				};
 				template.execute(callback);
 			} catch (Exception e) {
-				/*
-				 * JPA покажет ошибку
-				 */
+				log.warn(e.getMessage());
 			}
 		}
 	}

@@ -18,7 +18,6 @@ public class Message {
 
 	public enum Status {
 		NEW,
-		ASS,
 		READED;
 	}
 
