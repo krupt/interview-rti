@@ -30,6 +30,7 @@ function process() {
 			console.log(errorThrown);
 		},
 		success: function(data, textStatus, jqXHR) {
+			console.log(data);
 			result = data;
 		},
 		complete: function(jqXHR, textStatus) {

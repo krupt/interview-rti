@@ -1,15 +1,12 @@
 package ru.rti.model.ref.core;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.Column;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.Table;
 import javax.persistence.TypedQuery;
 import javax.sql.DataSource;
@@ -46,9 +43,9 @@ public class EnumJpaSynchronizer {
 		this.dataSource = dataSource;
 	}
 
-	@PostConstruct
 	@SuppressWarnings("unchecked")
-	private void doSynchronize() throws ClassNotFoundException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	@PostConstruct
+	private void doSynchronize() throws ClassNotFoundException {
 		log.info("Synchronization started");
 		ClassPathScanningCandidateComponentProvider enumScanner = new ClassPathScanningCandidateComponentProvider(false);
 		enumScanner.addIncludeFilter(new AnnotationTypeFilter(MappedEnum.class));
@@ -56,7 +53,7 @@ public class EnumJpaSynchronizer {
 		int candidatesCount = candidates.size(),
 			index = 1;
 		for (BeanDefinition finded: candidates) {
-			log.info("Processing (" + index + " of " + candidatesCount + ")");
+			log.info(String.format("Processing (%d of %d)", index, candidatesCount));
 			Class<? extends Reference> mappedClass = Reference.class;
 			try {
 				mappedClass = (Class<? extends Reference>) Class.forName(finded.getBeanClassName());
@@ -65,41 +62,21 @@ public class EnumJpaSynchronizer {
 				throw e;
 			}
 			Class<? extends Enum<?>> enumClass = mappedClass.getAnnotation(MappedEnum.class).value();
-			log.info("Founded linked " + enumClass);
-			printEnumValues(enumClass);
+			log.info("Linked " + enumClass);
 			createForeignKey(mappedClass, enumClass);
 			insertEnumValues(mappedClass, enumClass);
-			fillEnumIdentifiers(mappedClass, enumClass);
-			printEnumValues(enumClass);
-			log.info("(" + index++ + " of " + candidatesCount + ") Linked " + enumClass + " synchronized");
+			checkEnumIdentifiers(mappedClass, enumClass);
+			log.info(String.format("(%d of %d) Mapped %s and Linked %s synchronized", index++, candidatesCount, mappedClass, enumClass));
 		}
 		log.info("Synchronization successfully completed");
-	}
-
-	private void printEnumValues(Class<? extends Enum<?>> enumClass) {
-		StringBuilder values = new StringBuilder("\nList values of ")
-				.append(enumClass).append(":");
-			for (Enum<?> enumValue: enumClass.getEnumConstants())
-				values.append("\n").append(enumValue)
-					.append(" is ").append(enumValue.ordinal());
-			log.debug(values.toString());
 	}
 
 	private void insertEnumValues(Class<? extends Reference> mappedClass, Class<? extends Enum<?>> enumClass) {
 		log.debug("Inserting enum values");
 		for (Enum<?> constant: enumClass.getEnumConstants()) {
 			try {
-				TypedQuery<? extends Reference> selectQuery = entityManager.createQuery("SELECT e FROM " + mappedClass.getSimpleName() + " e WHERE javaCode = ?1", mappedClass);
-				selectQuery.setParameter(1, constant.toString());
-				try {
-					selectQuery.getSingleResult();
-					continue;
-				} catch (NoResultException e) {
-					/*
-					 * Нужно добавить значение
-					 */
-				}
 				Reference newInstance = mappedClass.newInstance();
+				newInstance.setId(constant.ordinal());
 				newInstance.setJavaCode(constant.toString());
 				TransactionTemplate template = new TransactionTemplate(transactionManager);
 				TransactionCallback<Object> callback = (status) -> {
@@ -108,33 +85,22 @@ public class EnumJpaSynchronizer {
 				};
 				template.execute(callback);
 			} catch (Exception e) {
-				log.warn(e.getMessage());
+				/*
+				 * JPA выведет ошибку в лог
+				 */
 			}
 		}
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void fillEnumIdentifiers(Class<? extends Reference> mappedClass, Class<? extends Enum<?>> enumClass) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	private void checkEnumIdentifiers(Class<? extends Reference> mappedClass, Class<? extends Enum<?>> enumClass) {
 		TypedQuery<? extends Reference> selectQuery = entityManager.createQuery("SELECT e FROM " + mappedClass.getSimpleName() + " e", mappedClass);
 		List<? extends Reference> referenceList = selectQuery.getResultList();
-		for (Reference reference: referenceList)
-			setEnumOrdinal(Enum.valueOf((Class<? extends Enum>) enumClass, reference.getJavaCode()), reference.getId());
-		Object valuesArray = Array.newInstance(enumClass, referenceList.size());
-		int index = 0;
-        for (Enum enumValue : enumClass.getEnumConstants())
-            Array.set(valuesArray, index++, enumValue);
-        Field field = ReflectionUtils.findField(enumClass, "ENUM$VALUES");
-        ReflectionUtils.makeAccessible(field);
-        Field modifiersField = ReflectionUtils.findField(Field.class, "modifiers");
-        ReflectionUtils.makeAccessible(modifiersField);
-        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
-        field.set(null, valuesArray);
-	}
-
-	private void setEnumOrdinal(Enum<?> enumObject, int ordinal) throws IllegalArgumentException, IllegalAccessException {
-		Field field = ReflectionUtils.findField(enumObject.getClass(), "ordinal");
-		ReflectionUtils.makeAccessible(field);
-		field.set(enumObject, ordinal);
+		for (Reference reference: referenceList) {
+			Enum<?> enumObject = Enum.valueOf((Class<? extends Enum>) enumClass, reference.getJavaCode());
+			if (reference.getId() != enumObject.ordinal())
+				throw new IllegalArgumentException(String.format("%s[%s] ordinal(%d) not equals %s", enumClass, enumObject, enumObject.ordinal(), reference));
+		}
 	}
 
 	private void createForeignKey(Class<? extends Reference> mappedClass, Class<?> enumClass) {

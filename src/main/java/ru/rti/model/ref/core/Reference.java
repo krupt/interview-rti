@@ -8,7 +8,6 @@ public class Reference {
 	public static final String PREFIX = "tReference";
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Column(unique = true, nullable = false, length = 32)
