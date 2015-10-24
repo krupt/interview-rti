@@ -1,15 +1,164 @@
 body {
 	padding: 70px 0;
 }
+.center {
+	text-align: center;
+}
+.navbar-nav > li, .navbar-nav {
+	float: left !important;
+}
+.navbar-nav.navbar-right:last-child {
+	margin-right: -15px !important;
+}
+.navbar-right {
+	float: right !important;
+}
+.navbar-nav {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+.navbar-nav > li > a {
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
+}
+.navbar-nav .login-nav.open .dropdown-menu {
+	position: absolute;
+	min-width: 240px;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, .15);
+	border-radius: 4px;
+	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+	margin-top: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	background-color: #fff;
+}
+.profile-img {
+	width: 96px;
+	height: 96px;
+	display: block;
+	border-radius: 50%;
+	margin: 0 auto 10px;
+}
+.borderafter {
+	border-bottom: 1px solid #E5E5E5;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+}
+.tab-pane {
+	padding-top: 20px;
+}
+.nav-tabs > li > a:focus {
+	outline: none;
+}
+.input-group .query {
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+.input-group-vertical {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+}
+.input-group-vertical > .form-control {
+	position: relative;
+	float: left;
+}
+.input-group-vertical > .form-control:focus {
+	z-index: 2;
+}
+.input-group-vertical > .form-control + .form-control {
+	margin-top: -1px;
+	margin-left: 0;
+}
+.input-group-vertical > .form-control:not(:first-child):not(:last-child) {
+	border-radius: 0;
+}
+.input-group-vertical > .form-control:first-child:not(:last-child) {
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.input-group-vertical > .form-control:last-child:not(:first-child) {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+.caret-right {
+  border-left: 4px solid;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-right: 4px solid transparent;
+  margin-left: 5px !important;
+}
+.btn-lg .caret.caret-right {
+	border-width: 5px;
+}
+.btn:focus, .btn:active {
+	outline: none !important;
+}
+.clearable {
+	background-position: right center;
+	background-repeat: no-repeat;
+}
+.clearable.x {
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAMCAIAAADgcHrrAAAABGdBTUEAALGPC/xhBQAAAHNJREFUKFOdUckNwDAIS/dfLRvklR878KCuLCGaNlSFR2QOA8GHmbWCgQYTEVUlpsGdcy5BzzYgpHvvYwwvAoCLINrFXjeaF5G5uFsaV2J7vA52G17niJ8hYVk4mxYH/qBVliyeJBEAqUyAp7Lfcr/2y4Mn8UE7Mbg7eroAAAAASUVORK5CYII=');
+	padding-right: 23px;
+}
+.clearable.onX {
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAMCAIAAADgcHrrAAAABGdBTUEAALGPC/xhBQAAAHNJREFUKFOdUckNwDAISyfPNlkgM7ARf+rKEqJpQ1V4ROYwEHyYWSsYaDARUVViGtw55xL0bANCuvc+xvAiALgIol3sdaN5EZmLu6VxJbbH62C34XWO+BkSloWzaXHgD1plyeJJEgGQygR4Kvst92u/PHgCE2YXlIkxzW8AAAAASUVORK5CYII=');
+	cursor: pointer;
+}
+.btn.btn-lg.can-loading {
+	position: relative;
+}
+.btn.btn-lg.can-loading .fa {
+	position: absolute;
+	top: 4px;
+	left: 5px;
+}
+#authPanel .nav.navbar-nav.navbar-left > li > a {
+	padding-left: 45px;
+}
+#authPanel .nav.navbar-nav > li > a.navbar-brand > .fa {
+	position: absolute;
+	top: 5px;
+	left: 8px;
+}
+#authPanel .nav.navbar-nav.navbar-right > li > a {
+	padding-left: 40px;
+}
+#authPanel .nav.navbar-nav.navbar-right > li > a > .fa {
+	position: absolute;
+	top: 10px;
+	left: 8px;
+}
+#authPanel .nav.navbar-nav.navbar-right .user-nav .fa {
+	color: #428bca;
+}
+#authPanel .nav.navbar-nav.navbar-right .login-nav .fa {
+	color: #5cb85c;
+}
+#authPanel .nav.navbar-nav.navbar-right .user-nav > a:hover .fa {
+	color: #3276b1;
+}
+#authPanel .nav.navbar-nav.navbar-right .login-nav > a:hover .fa {
+	color: #47a447;
+}
 .logout-btn {
-	padding: 15px;
+	padding: 15px 15px 15px 40px;
 	background-color: transparent;
 	border: none;
-	opacity: 0.7;
+	opacity: 0.8;
+}
+.logout-btn > .fa {
+	position: absolute;
+	top: 10px;
+	left: 8px;
 }
 .logout-btn:hover {
 	opacity: 1;
-}
-.center {
-	text-align: center;
 }
