@@ -153,6 +153,7 @@ body {
 	background-color: transparent;
 	border: none;
 	opacity: 0.8;
+	outline: none !important;
 }
 .logout-btn > .fa {
 	position: absolute;
