@@ -16,7 +16,7 @@ import javax.persistence.*;
 )
 public class Message {
 
-	public enum Status {
+	public static enum Status {
 		NEW,
 		READED;
 	}
