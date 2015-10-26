@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class CommonApplicationController {
 
+	public static final String SERVICE_PATH = "/service/";
+
 	private Logger log = LoggerFactory.getLogger(getClass());
 
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
