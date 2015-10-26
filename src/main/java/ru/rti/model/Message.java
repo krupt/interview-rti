@@ -14,16 +14,12 @@ import javax.persistence.*;
 		@NamedAttributeNode("recipient")
 	}
 )
-public class Message {
+public class Message extends EntityByLong {
 
 	public static enum Status {
 		NEW,
 		READED;
 	}
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "sender", nullable = false)
@@ -49,14 +45,6 @@ public class Message {
 	public void onCreate() {
 		setCreated(new Date());
 		setStatus(Status.NEW);
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public User getSender() {
@@ -108,27 +96,12 @@ public class Message {
 	}
 
 	@Override
-	public int hashCode() {
-		return (int) id;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj instanceof Message)
-			return this.id == ((Message) obj).id;
-		return false;
-	}
-
-	@Override
 	public String toString() {
 		return new StringBuilder("Message[")
-				.append(id).append(", ")
+				.append(getId()).append(", ")
 				.append(sender).append(", ")
 				.append(recipient).append(", ")
 				.append(topic).append(", ")
-				.append(message).append(", ")
 				.append(created).append(", ")
 				.append(status)
 			.append("]").toString();
