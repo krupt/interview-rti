@@ -12,9 +12,16 @@ public abstract class Client extends EntityByLong {
 
 	private Date created;
 
+	private Date updated;
+
 	@PrePersist
 	public void onCreate() {
 		setCreated(new Date());
+	}
+
+	@PreUpdate
+	public void onUpdate() {
+		setUpdated(new Date());
 	}
 
 	public Date getCreated() {
@@ -23,6 +30,14 @@ public abstract class Client extends EntityByLong {
 
 	public void setCreated(Date created) {
 		this.created = created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
 	}
 
 }
