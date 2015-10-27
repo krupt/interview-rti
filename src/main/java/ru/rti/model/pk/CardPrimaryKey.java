@@ -9,6 +9,19 @@ public class CardPrimaryKey implements Serializable {
 
 	private static final long serialVersionUID = 6908917591694183901L;
 
+	public CardPrimaryKey() {
+		
+	}
+
+	public CardPrimaryKey(String pan) {
+		this(pan, (byte) 0);
+	}
+
+	public CardPrimaryKey(String pan, byte mbr) {
+		setPan(pan);
+		setMbr(mbr);
+	}
+
 	@Column(length = 20)
 	private String pan;
 

@@ -1,11 +1,10 @@
 package ru.rti.model;
 
 import java.util.Date;
-
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("Person")
+@DiscriminatorValue(Client.PERSON)
 @Table(name = "tClientPerson")
 public class ClientPerson extends Client {
 
@@ -20,6 +19,7 @@ public class ClientPerson extends Client {
 	@Column(nullable = false, length = 50)
 	private String translit;
 
+	@Temporal(TemporalType.DATE)
 	private Date birthday;
 
 	@Column(length = 50)

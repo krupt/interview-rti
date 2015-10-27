@@ -8,10 +8,17 @@ import ru.rti.model.core.IdentifiedByLong;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "type", length = 10)
+@DiscriminatorColumn(name = "type", length = 3)
 @Table(name = "tClient")
 public abstract class Client extends IdentifiedByLong {
 
+	public static final String PERSON = "4";
+	public static final String BANK = "16";
+
+	@Column(insertable = false, updatable = false)
+	private String type;
+
+	@Column(nullable = false)
 	private Date created;
 
 	private Date updated;
@@ -24,6 +31,14 @@ public abstract class Client extends IdentifiedByLong {
 	@PreUpdate
 	public void onUpdate() {
 		setUpdated(new Date());
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Date getCreated() {

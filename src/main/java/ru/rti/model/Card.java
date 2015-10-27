@@ -21,10 +21,16 @@ public class Card {
 	private Date created;
 
 	@Column(nullable = false, updatable = false)
+	@Temporal(TemporalType.DATE)
 	private Date expDate;
 
 	@Column(length = 10)
 	private String pinOffset;
+
+	@PrePersist
+	public void onCreate() {
+		setCreated(new Date());
+	}
 
 	public String getPan() {
 		return getId().getPan();
@@ -72,6 +78,29 @@ public class Card {
 
 	public void setPinOffset(String pinOffset) {
 		this.pinOffset = pinOffset;
+	}
+
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj instanceof Card)
+			return id.equals(((Card)obj).id);
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return new StringBuilder("Card[")
+				.append(id).append(", ")
+				.append(expDate).append(", ")
+				.append(client).append("]")
+			.toString();
 	}
 
 }
