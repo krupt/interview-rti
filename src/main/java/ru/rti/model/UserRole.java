@@ -2,12 +2,14 @@ package ru.rti.model;
 
 import javax.persistence.*;
 
+import ru.rti.model.core.IdentifiedByLong;
+
 @Entity
 @Table(name = "tUserRole", 
 	uniqueConstraints = {
 		@UniqueConstraint(columnNames = {"userId", "role"})
 	})
-public class UserRole extends EntityByLong {
+public class UserRole extends IdentifiedByLong {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userId")

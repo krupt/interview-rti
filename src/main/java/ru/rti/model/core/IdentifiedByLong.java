@@ -1,9 +1,9 @@
-package ru.rti.model;
+package ru.rti.model.core;
 
 import javax.persistence.*;
 
 @MappedSuperclass
-public class EntityByLong {
+public class IdentifiedByLong {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class EntityByLong {
 		if (this == obj)
 			return true;
 		if (getClass().equals(obj.getClass()))
-			return id == ((EntityByLong) obj).id;
+			return id == ((IdentifiedByLong) obj).id;
 		return false;
 	}
 

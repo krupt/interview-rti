@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import ru.rti.model.pk.CardPrimaryKey;
+
 @Entity
 @Table(name = "tCard")
 public class Card {

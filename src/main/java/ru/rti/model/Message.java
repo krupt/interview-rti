@@ -3,6 +3,8 @@ package ru.rti.model;
 import java.util.Date;
 import javax.persistence.*;
 
+import ru.rti.model.core.IdentifiedByLong;
+
 @Entity
 @Table(name = "tMessage",
 	indexes = {@Index(columnList = "recipient"),
@@ -14,7 +16,7 @@ import javax.persistence.*;
 		@NamedAttributeNode("recipient")
 	}
 )
-public class Message extends EntityByLong {
+public class Message extends IdentifiedByLong {
 
 	public static enum Status {
 		NEW,

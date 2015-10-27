@@ -6,12 +6,14 @@ import java.util.Set;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import ru.rti.model.core.IdentifiedByLong;
+
 @Entity
 @Table(name = "tUser")
 @NamedEntityGraph(name = "userRoles",
 	attributeNodes = @NamedAttributeNode("roles")
 )
-public class User extends EntityByLong {
+public class User extends IdentifiedByLong {
 
 	@Column(unique = true, nullable = false, length = 50)
 	private String email;

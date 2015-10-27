@@ -4,11 +4,13 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import ru.rti.model.core.IdentifiedByLong;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "type", length = 10)
 @Table(name = "tClient")
-public abstract class Client extends EntityByLong {
+public abstract class Client extends IdentifiedByLong {
 
 	private Date created;
 

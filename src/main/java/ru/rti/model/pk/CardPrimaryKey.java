@@ -1,4 +1,4 @@
-package ru.rti.model;
+package ru.rti.model.pk;
 
 import java.io.Serializable;
 
