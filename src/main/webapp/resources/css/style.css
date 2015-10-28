@@ -163,3 +163,12 @@ body {
 .logout-btn:hover {
 	opacity: 1;
 }
+.input-img > input {
+	padding-left: 30px;
+}
+.input-img > input + .fa {
+	position: absolute;
+	top: 8px;
+	left: 24px;
+	font-size: 1.3em;
+}

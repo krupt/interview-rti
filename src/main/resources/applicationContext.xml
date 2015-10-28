@@ -57,4 +57,7 @@
 			</props>
 		</property>
 	</bean>
+	<bean class="org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator">
+		<constructor-arg ref="dataSource" />
+	</bean>
 </beans>
