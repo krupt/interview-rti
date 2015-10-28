@@ -51,7 +51,7 @@
 		<constructor-arg ref="dataSourceConfig" />
 	</bean>
 	<bean id="vendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-		
+
 	</bean>
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" init-method="afterPropertiesSet">
 		<property name="packagesToScan" value="ru.rti.model" />
@@ -65,5 +65,8 @@
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
+	</bean>
+	<bean class="org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator">
+		<constructor-arg ref="dataSource" />
 	</bean>
 </beans>
