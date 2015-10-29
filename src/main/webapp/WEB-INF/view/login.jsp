@@ -25,7 +25,7 @@
 			<label for="password" class="col-sm-2 control-label">Пароль</label>
 			<div class="col-sm-6 input-img">
 				<input type="password" class="form-control" id="password" name="password" required>
-				<i class="fa fa-unlock-alt text-warning"></i>
+				<i id="password-secret" class="fa fa-lock text-warning" style="cursor: pointer;"></i>
 			</div>
 		</div>
 		<div class="form-group">
@@ -45,5 +45,19 @@
 		</div>
 	</form>
 </div>
+<script type="text/javascript">
+	$('#password-secret').click(function() {
+		var $pwd = $('#password');
+		if ($pwd.attr('type') == 'password')
+			$pwd.attr('type', 'text');
+		else
+			$pwd.attr('type', 'password');
+		$(this).toggleClass('fa-lock')
+			.toggleClass('fa-unlock')
+			.toggleClass('text-warning')
+			.toggleClass('text-danger');
+		$pwd.focus();
+	});
+</script>
 </body>
 </html>

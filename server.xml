@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Only changes -->
+<!-- Generate keystore
+keytool -genkey -alias krupt-tomcat -keyalg RSA
+-->
+<Server port="8005" shutdown="SHUTDOWN">
+  <!--<Listener SSLEngine="on" className="org.apache.catalina.core.AprLifecycleListener"/>-->
+  <Service name="Catalina">
+    <Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+               maxThreads="200" SSLEnabled="true" scheme="https" secure="true"
+               clientAuth="false" sslProtocol="TLS"
+               keystoreFile="${user.home}/.keystore" keystorePass="[PROTECTED]"
+               keystoreType="JKS" keyAlias="krupt-tomcat" />
+  </Service>
+</Server>
