@@ -6,7 +6,18 @@
 <title>Вход</title>
 <%@ include file="link.jsp" %>
 </head>
-<body>
+<body style="padding: 140px 0 0;">
+<nav id="authPanel" class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<ul class="nav navbar-nav navbar-left">
+			<li>
+				<a class="navbar-brand" href="<c:url value="/" />">
+					<i class="fa fa-home fa-2x"></i>RTI-Project
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
 <div class="container">
 	<c:if test="${not empty error}"> 
 		<div class="alert alert-danger">
@@ -24,7 +35,7 @@
 		<div class="form-group">
 			<label for="password" class="col-sm-2 control-label">Пароль</label>
 			<div class="col-sm-6 input-img">
-				<input type="password" class="form-control" id="password" name="password" required>
+				<input type="password" class="form-control" id="password" name="password" required autocomplete="off">
 				<i id="password-secret" class="fa fa-lock text-warning" style="cursor: pointer;"></i>
 			</div>
 		</div>
