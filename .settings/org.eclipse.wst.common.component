@@ -4,10 +4,9 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <property name="context-root" value="rti"/>
         <property name="java-output-path" value="/rti/target/classes"/>
-        <property name="component.exclusion.patterns" value="WEB-INF/classes/"/>
+        <property name="component.inclusion.patterns"/>
+        <property name="component.exclusion.patterns" value="WEB-INF/classes/ru/"/>
     </wb-module>
 </project-modules>

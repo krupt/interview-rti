@@ -7,6 +7,17 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>rti Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  <properties>
+  	<spring.version>4.2.1.RELEASE</spring.version>
+  	<spring-security.version>4.0.2.RELEASE</spring-security.version>
+  	<spring-data-jpa.version>1.9.0.RELEASE</spring-data-jpa.version>
+  	<jackson.version>2.6.2</jackson.version>
+  	<hibernate.version>5.0.2.Final</hibernate.version>
+  	<logback.version>1.1.3</logback.version>
+  	<HikariCP.version>2.4.1</HikariCP.version>
+  	<postgresql.version>9.4-1204-jdbc42</postgresql.version>
+  	<junit.version>4.12</junit.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -117,6 +128,9 @@
       		<archive>
       			<addMavenDescriptor>false</addMavenDescriptor>
       		</archive>
+      		<excludes>
+      		  <exclude>*</exclude>
+      		</excludes>
       		<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/lib</outputDirectory>
       	</configuration>
       </plugin>
@@ -126,7 +140,7 @@
 		<version>2.6</version>
 		<configuration>
 			<warName>${project.artifactId}</warName>
-			<packagingExcludes>WEB-INF/classes/</packagingExcludes>
+			<packagingExcludes>WEB-INF/classes/ru/</packagingExcludes>
 			<archive>
 				<addMavenDescriptor>false</addMavenDescriptor>
 				<manifestEntries>
@@ -137,15 +151,4 @@
       </plugin>
     </plugins>
   </build>
-  <properties>
-  	<spring.version>4.2.1.RELEASE</spring.version>
-  	<spring-security.version>4.0.2.RELEASE</spring-security.version>
-  	<spring-data-jpa.version>1.9.0.RELEASE</spring-data-jpa.version>
-  	<jackson.version>2.6.2</jackson.version>
-  	<hibernate.version>5.0.2.Final</hibernate.version>
-  	<logback.version>1.1.3</logback.version>
-  	<HikariCP.version>2.4.1</HikariCP.version>
-  	<postgresql.version>9.4-1204-jdbc42</postgresql.version>
-  	<junit.version>4.12</junit.version>
-  </properties>
 </project>
